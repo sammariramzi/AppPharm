@@ -88,8 +88,24 @@ class New_user(UserCreationForm):
     class Meta:
         model=User
         fields=['username','password1','password2','first_name','last_name','email','groups']
+        labels ={
+            'username':'Nom Utilisateur',
+            'password1':'Mot De Passe',
+            'password2':'Confirmation Mot De Passe',
+            'first_name':'Nom',
+            'last_name':'Prenom',
+            'email':'Email',
+            'groups':'groupe',
+        }
 
 class Update_user(forms.ModelForm):
     class Meta:
         model=User
         fields=['username','first_name','last_name','email','groups','is_active']
+        labels ={
+            'username':'Nom Utilisateur',
+            'first_name':'Nom',
+            'last_name':'Prenom',
+            'email':'Email',
+            'groups':'groupe',
+        }

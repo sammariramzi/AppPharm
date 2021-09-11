@@ -115,8 +115,9 @@ def add_product(request):
             edit.username=User.objects.get(username=request.user.username)
             edit.Nom_C=Product.objects.get(Nom_C=form.cleaned_data['Nom_C'])
             edit.save()
+
             messages.success(request,'Médicament ajouté avec succès')
-        
+                 
 
     context={
         'productform':Productform,
@@ -399,7 +400,6 @@ def detail_user(request , pk):
 def dalete_user(request ,pk):
     user=User.objects.get(id=pk)
     if user.username == request.user.username :
-
         messages.error(request,'utilisateur connecté ne peut pas être supprimé')
         return redirect('App:list_user')
     elif(request.method == 'POST'):
