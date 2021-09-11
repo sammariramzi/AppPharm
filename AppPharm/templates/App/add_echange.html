@@ -1,0 +1,83 @@
+{% extends "include/main.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        <h2>Add Medicines</h2>
+    </div>
+    <div class="card-body">
+        <form id="formAdd" method="POST">
+            {% csrf_token %}
+            <label for="Pharmaci" class=" requiredField">
+                Pharmaci <span class="asteriskField">*</span>
+            </label>
+            <div class="form-inline">
+                <select name="Pharmaci" class="form-control" style="width: 90%;">
+                    <option class="after" value="">---------</option>
+                </select>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop5"><i
+                        class="fas fa-plus fa-2x"></i></a>
+            </div>
+            <div>{{echangeForm.Nom_C|as_crispy_field}}</div>
+            <div>{{echangeForm.Qte|as_crispy_field}}</div>
+            <button type="submit" class="btn btn-success" style="margin-top:30px ;">Submit</button>
+        </form>
+    </div>
+</div>
+{% include "App/add_pharmaci.html" %}
+<script>
+    pharmaci_list()
+    function pharmaci_list() {
+        $.ajax({
+            url: '/pharmaci_list',
+            type: 'GET',
+            success: function (resp) {
+
+                const data = JSON.parse(resp.data);
+                let options = '';
+                data.forEach(x => {
+                    options += '<option value=' + x.fields.Id + '>' + x.pk + '</option>';
+                });
+                console.log(options);
+                $("#formAdd select[name='Pharmaci']").append(options);
+            },
+            error: function (resp) {
+                console.log('Something went wrong');
+            }
+        });
+    }
+
+
+    function add_pharmaci() {
+        let w = document.getElementById('id_Numéro_Inscription').value;
+        let x = document.getElementById('id_Nom_Ph').value;
+        let y = document.getElementById('id_Tel').value;
+        let z = document.getElementById('id_Adresse').value;
+        if (w == "" || x == "" || y == "" || z == "") {
+            alert("Name must be filled out");
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "{% url 'App:add_pharmaci' %}",
+                data: {
+                    'num': $('#id_Numéro_Inscription').val(),
+                    'nom': $('#id_Nom_Ph').val(),
+                    'tel': $('#id_Tel').val(),
+                    'adresse': $('#id_Adresse').val(),
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+
+                },
+                success: function () {
+                    $('#staticBackdrop5').modal('hide')
+                    pharmaci_list()
+                    $("#formAdd select[name='Pharmaci']").find('.after').nextAll().remove();
+                }
+            });
+
+
+        }
+
+    }
+</script>
+{% endblock content %}

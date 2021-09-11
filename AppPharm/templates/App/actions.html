@@ -1,0 +1,244 @@
+{% extends "include/main.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="card mb-4">
+    <div class="card-header">
+        <div>
+            <i class="fas fa-table me-1"></i>
+            <h3>Actions</h3>
+        </div>
+    </div>
+    <div class="card-body">
+        <br>
+        <h3>Ventes ajoutés</h3>
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>Utilisateur</th>
+                    <th>Nom commercial</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Utilisateur</th>
+                    <th>Nom commercial</th>
+                    <th>Date</th>
+                </tr>
+            </tfoot>
+            <tbody>
+
+                {% for i in vente_added %}
+                <tr>
+                    <td>{{i.username}}</td>
+                    <td>{{i.Nom_C}}</td>
+                    <td>{{i.Date}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <h3>Médicaments ajoutées</h3>
+        <table id="datatablesSimple2">
+            <thead>
+                <tr>
+                    <th>Utilisateur</th>
+                    <th>Nom commercial</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Utilisateur</th>
+                    <th>Nom commercial</th>
+                    <th>Date</th>
+                </tr>
+            </tfoot>
+            <tbody>
+
+                {% for i in product_added %}
+                <tr>
+                    <td>{{i.username}}</td>
+                    <td>{{i.Nom_C}}</td>
+                    <td>{{i.Date}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <h3>modifications médicament</h3>
+        <table id="datatablesSimple3">
+            <thead>
+                <tr>
+                    <th>Utilisateur</th>
+                    <th>Nom commercial</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Utilisateur</th>
+                    <th>Nom commercial</th>
+                    <th>Date</th>
+                </tr>
+            </tfoot>
+            <tbody>
+
+                {% for i in product_edit %}
+                <tr>
+                    <td>{{i.username}}</td>
+                    <td>{{i.Nom_C}}</td>
+                    <td>{{i.Date}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <h3>Médicaments supprimés</h3>
+        <table id="datatablesSimple4">
+            <thead>
+                <tr>
+                    <th>Utilisateur</th>
+                    <th>Nom commercial</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Utilisateur</th>
+                    <th>Nom commercial</th>
+                    <th>Date</th>
+                </tr>
+            </tfoot>
+            <tbody>
+
+                {% for i in dalete_product %}
+                <tr>
+                    <td>{{i.username}}</td>
+                    <td>{{i.Nom_C}}</td>
+                    <td>{{i.Date}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <h3>Échanges ajoutés</h3>
+        <table id="datatablesSimple5">
+            <thead>
+                <tr>
+                    <th>Utilisateur</th>
+                    <th>Nom commercial</th>
+                    <th>Pharmaci</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Utilisateur</th>
+                    <th>Nom commercial</th>
+                    <th>Pharmaci</th>
+                    <th>Date</th>
+                </tr>
+            </tfoot>
+            <tbody>
+
+                {% for i in echange_added %}
+                <tr>
+                    <td>{{i.username}}</td>
+                    <td>{{i.Nom_C}}</td>
+                    <td>{{i.Nom_Ph}}</td>
+                    <td>{{i.Date}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <h3>Échanges supprimés</h3>
+        <table id="datatablesSimple6">
+            <thead>
+                <tr>
+                    <th>Utilisateur</th>
+                    <th>Nom commercial</th>
+                    <th>Pharmaci</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Utilisateur</th>
+                    <th>Nom commercial</th>
+                    <th>Pharmaci</th>
+                    <th>Date</th>
+                </tr>
+            </tfoot>
+            <tbody>
+
+                {% for i in dalete_echange %}
+                <tr>
+                    <td>{{i.username}}</td>
+                    <td>{{i.Nom_C}}</td>
+                    <td>{{i.Nom_Ph}}</td>
+                    <td>{{i.Date}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', event => {
+  
+
+  const datatablesSimple = document.getElementById('datatablesSimple');
+  if (datatablesSimple) {
+      new simpleDatatables.DataTable(datatablesSimple);
+  }
+});
+
+window.addEventListener('DOMContentLoaded', event => {
+
+
+  const datatablesSimple = document.getElementById('datatablesSimple2');
+  if (datatablesSimple) {
+      new simpleDatatables.DataTable(datatablesSimple);
+  }
+});
+
+window.addEventListener('DOMContentLoaded', event => {
+
+
+  const datatablesSimple = document.getElementById('datatablesSimple3');
+  if (datatablesSimple) {
+      new simpleDatatables.DataTable(datatablesSimple);
+  }
+});
+
+window.addEventListener('DOMContentLoaded', event => {
+
+
+  const datatablesSimple = document.getElementById('datatablesSimple4');
+  if (datatablesSimple) {
+      new simpleDatatables.DataTable(datatablesSimple);
+  }
+});
+
+window.addEventListener('DOMContentLoaded', event => {
+
+
+  const datatablesSimple = document.getElementById('datatablesSimple5');
+  if (datatablesSimple) {
+      new simpleDatatables.DataTable(datatablesSimple);
+  }
+});
+
+window.addEventListener('DOMContentLoaded', event => {
+
+
+  const datatablesSimple = document.getElementById('datatablesSimple6');
+  if (datatablesSimple) {
+      new simpleDatatables.DataTable(datatablesSimple);
+  }
+});
+
+</script>
+{% endblock content %}

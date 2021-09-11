@@ -1,0 +1,83 @@
+{% extends "include/main.html" %}
+{% block content %}
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            <h2>List Of Medicines</h2>
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple"> 
+                <tr>
+                    <th>Nom commercial</th>
+                    <td>{{product.Nom_C}}</td>
+                </tr>
+                <tr>
+                    <th>Numéro de lot</th>
+                    <td>{{product.N_Lot}}</td>
+                </tr>
+                <tr>
+                    <th>Dosage</th>
+                    <td>{{product.Dosage}}</td>
+                </tr>
+                <tr>
+                    <th>Forme</th>
+                    <td>{{product.Forme}}</td>
+                </tr>
+                <tr>
+                    <th>Présentation</th>
+                    <td>{{product.Présentation}}</td>
+                </tr>
+                <tr>
+                    <th>Dci</th>
+                    <td>{{product.Dci_Nom}}</td>
+                </tr>
+                <tr>
+                    <th>Laboratoire</th>
+                    <td>{{product.Labo}}</td>
+                </tr>
+                <tr>
+                    <th>Classe Thérapeutique</th>
+                    <td>{{product.Classe_thérapeutique_Nom}}</td>
+                </tr>
+                <tr>
+                    <th>Sous Classe</th>
+                    <td>{{product.Sous_classe_Nom}}</td>
+                </tr>
+                <tr>
+                    <th>Conditionnement</th>
+                    <td>{{product.Conditionnement}}</td>
+                </tr>
+                <tr>
+                    <th>Spécification</th>
+                    <td>{{product.Spécification}}</td>
+                </tr>
+                <tr>
+                    <th>Tableau</th>
+                    <td>{{product.Tableau}}</td>
+                </tr>
+                <tr>
+                    <th>Durée Conservation</th>
+                    <td>{{product.Durée_conservation}}</td>
+                </tr>
+                <tr>
+                    <th>Price</th>
+                    <td>{{product.Price}}</td>
+                </tr>
+                <tr>
+                    <th>Quantité</th>
+                    <td>{{product.Qte}}</td>
+                </tr>
+                <tr>
+                    <th>Active</th>
+                    {% if product.Is_Active %}
+                        <th>Oui</th>
+                    {% else %}
+                        <th>Non</th>
+                    {% endif %}
+                    
+                </tr>
+            </table>
+        </div>
+    </div>
+{% endblock content %}

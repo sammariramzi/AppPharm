@@ -1,0 +1,56 @@
+{% extends "include/main.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="card mb-4">
+    <div class="card-header">
+        <div>
+            <i class="fas fa-table me-1"></i>
+            <h3>Utilisateurs</h3>
+        </div>
+    </div>
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>Nom Et Prenom</th>
+                    <th>Groupe</th>
+                    <th>Dernière connexion</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Nom Et Prenom</th>
+                    <th>Groupe</th>
+                    <th>Dernière connexion</th>
+                    <th>Action</th>
+                </tr>
+            </tfoot>
+            <tbody>
+
+                {% for i in user %}
+                <tr>
+                    <td>
+                        <a href="{% url 'App:detail_user' i.id %}">
+                            <button style="color: rgb(95, 95, 248);">
+                                <i class="fas fa-info-circle"></i>
+                            </button>{{i.first_name}} {{i.last_name}}
+                        </a>
+                    </td>
+                    <td>
+                        {{i.groups.get}}
+                    </td>
+                    <td>
+                        {{i.last_login}}
+                    </td>
+                    <td>
+                        <a href="{% url 'App:edit_user' i.id %}"><button><i class="fas fa-pen-alt"></i></button></a>
+                        <a href="{% url 'App:dalete_user' i.id %}"><button style="color:rgb(212, 0, 0);"><i class="fas fa-trash-alt"></i></button></a> 
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}

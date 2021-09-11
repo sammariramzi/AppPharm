@@ -1,0 +1,43 @@
+<div id="layoutSidenav_nav">
+    <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+        <div class="sb-sidenav-menu">
+            <div class="nav">
+                <div class="sb-sidenav-menu-heading">Core</div>
+                <a class="nav-link" href="/ventes">
+                    <div class="sb-nav-link-icon"><i class="fas fa-cart-arrow-down"></i></div>
+                    Ventes
+                </a>
+                <a class="nav-link" href="/list_product">
+                    <div class="sb-nav-link-icon"><i class="fas fa-pills"></i></div>
+                    Médicaments
+                </a>
+                <a class="nav-link" href="/list_echange">
+                    <div class="sb-nav-link-icon"><i class="fas fa-exchange-alt"></i></div>
+                    Echanges
+                </a>
+                {% if request.user.is_staff %}
+                <a class="nav-link" href="/actions">
+                    <div class="sb-nav-link-icon"><i class="fas fa-history"></i></div>
+                    Actions
+                </a>
+                <div class="sb-sidenav-menu-heading">Réglage</div>
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                    <div class="sb-nav-link-icon"><i class="fas fa-user-circle"></i></div>
+                    Compte
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" href="/list_user">Liste Utilisateur</a>
+                        <a class="nav-link" href="/CreationUser">Ajouet Utilisateur</a>
+                    </nav>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="sb-sidenav-footer">
+            <div class="small">Bienvenue: <a class="text-info" style="text-decoration: none;">{{request.user.username}}</a> </div>
+            <a class="btn btn-danger btn-sm" href="/logout" role="button" style="width: 40%; margin-top: 10px;">Logout</a>
+        </div>
+    </nav>
+</div>

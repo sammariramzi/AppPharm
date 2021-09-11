@@ -1,0 +1,43 @@
+{% extends "include/main.html" %}
+{% block content %}
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            <h2>List Of Medicines</h2>
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple"> 
+                <tr>
+                    <th>username</th>
+                    <td>{{user.username}}</td>
+                </tr>
+                <tr>
+                    <th>first_name</th>
+                    <td>{{user.first_name}}</td>
+                </tr>
+                <tr>
+                    <th>last_name</th>
+                    <td>{{user.last_name}}</td>
+                </tr>
+                <tr>
+                    <th>email</th>
+                    <td>{{user.email}}</td>
+                </tr>
+                <tr>
+                    <th>group</th>
+                    <td>{{user.groups.get}}</td>
+                </tr>
+                <tr>
+                    <th>Active</th>
+                    {% if user.is_active %}
+                        <th>Oui</th>
+                    {% else %}
+                        <th>Non</th>
+                    {% endif %}
+                    
+                </tr>
+            </table>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Dashboard</title>
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    <script src="{% static 'js/all.min.js' %}" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        span {
+            color: red;
+        }
+
+        a {
+            color: rgb(46, 46, 46);
+            text-decoration: none;
+        }
+
+        #datatablesSimple button {
+            border: none;
+            background: none;
+        }
+
+        #datatablesSimple2 button {
+            border: none;
+            background: none;
+        }
+
+        input,
+        select {
+            margin-top: 8px;
+            margin-bottom: 20px;
+        }
+
+        .form-inline {
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+        }
+
+        .form-inline a {
+            margin-left: 10px;
+            color: rgb(66, 186, 150);
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body class="sb-nav-fixed">
+    {% include "include/navbar.html" %}
+    <div id="layoutSidenav">
+        {% include "include/sidebar.html" %}
+        <div id="layoutSidenav_content">
+            <main>
+                {% block content %}
+
+                {% endblock content %}
+            </main>
+            {% include "include/footer.html" %}
+        </div>
+    </div>
+    <script src="{% static 'js/alert.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}" crossorigin="anonymous"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script src="{% static 'js/simple-datatables@latest.js' %}" crossorigin="anonymous"></script>
+    <script src="{% static 'js/datatables-simple-demo.js' %}"></script>
+    {% include "include/messages.html" %}
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+{% extends "include/main.html" %}
+{% block content %}
+    <div class="card mb-4">
+        <div class="card-header">
+            <div><i class="fas fa-table me-1"></i>
+                <h3>Liste Médicament</h3> 
+                <a href="/add_product">
+                    <button class="btn btn-success" style="float: right;">
+                        <i class="fas fa-plus-square"></i> Ajouter
+                    </button>
+                </a>
+            </div>
+        </div>
+        <div class="card-body">
+            <h4>En stock</h4>
+            <table id="datatablesSimple">
+                <thead>
+                    <tr>
+                        <th>Nom commercial</th>
+                        <th>Numéro de lot</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Nom commercial</th>
+                        <th>Numéro de lot</th>
+                        <th>Action</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    
+                    {% for i in product %}
+                        {% if i.Is_Active  %}
+
+                        <tr>                          
+                            <td><a href="{% url 'App:detail_product' i.Nom_C %}"><button style="color: rgb(95, 95, 248);"><i class="fas fa-info-circle"></i></button>{{i.Nom_C}}</a></td>
+                            <td>{{i.N_Lot}}</td>
+                            <td>
+                                <a href="{% url 'App:edit_product' i.Nom_C %}"><button><i class="fas fa-pen-alt"></i></button></a>
+                                {% if request.user.is_staff %}
+                                <a href="{% url 'App:dalete_product' i.Nom_C %}"><button style="color:rgb(212, 0, 0);"><i class="fas fa-trash-alt"></i></button></a>  
+                                {% endif %} 
+                            </td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %} 
+                </tbody>
+            </table>
+            <br><hr><br>
+            <h4>Rupture de stock</h4>
+            <table id="datatablesSimple2">
+                <thead>
+                    <tr>
+                        <th>Nom commercial</th>
+                        <th>Numéro de lot</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Nom commercial</th>
+                        <th>Numéro de lot</th>
+                        <th>Action</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    
+                    {% for i in product %}
+                        {% if  not i.Is_Active %}
+                        
+                            <tr>
+                                <td><a href="{% url 'App:detail_product' i.Nom_C %}"><button style="color: rgb(95, 95, 248);"><i class="fas fa-info-circle"></i></button>{{i.Nom_C}}</a></td>
+                                <td>{{i.N_Lot}}</td>
+                                <td>
+                                    <a href="{% url 'App:edit_product' i.Nom_C %}"><button><i class="fas fa-pen-alt"></i></button></a>
+                                    {% if request.user.is_staff %}
+                                    <a href="{% url 'App:dalete_product' i.Nom_C %}"><button style="color:rgb(212, 0, 0);"><i class="fas fa-trash-alt"></i></button></a> 
+                                    {% endif %} 
+                                </td>
+                            </tr>
+
+                        {% endif %}
+                    {% endfor %} 
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        window.addEventListener('DOMContentLoaded', event => {
+            const datatablesSimple = document.getElementById('datatablesSimple2');
+            if (datatablesSimple) {
+                new simpleDatatables.DataTable(datatablesSimple);
+            }
+        });
+    </script>
+{% endblock content %}

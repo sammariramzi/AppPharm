@@ -1,0 +1,59 @@
+{% extends "include/main.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="card mb-4">
+    <div class="card-header">
+        <div>
+            <i class="fas fa-table me-1"></i>
+            <h3>Ventes</h3>
+            <a href="/historique_vente">
+                <button class="btn btn-success" style="float: right;">
+                    <i class="fas fa-history"></i> Historique
+                </button>
+            </a>
+        </div>
+    </div>
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>Nom commercial</th>
+                    <th>Quantité</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Nom commercial</th>
+                    <th>Quantité</th>
+                </tr>
+            </tfoot>
+            <tbody>
+
+                {% for i in product %}
+                {% if i.Is_Active %}
+
+                <tr>
+                    <td>
+                        <a href="{% url 'App:detail_product' i.Nom_C %}">
+                            <button style="color: rgb(95, 95, 248);">
+                                <i class="fas fa-info-circle"></i>
+                            </button>{{i.Nom_C}}
+                        </a>
+                    </td>
+                    <td>
+                        <form method="POST" action="{% url 'App:add_vente' i.Nom_C %}">
+                            {% csrf_token %}
+                            <div class="form-inline">
+                                {{venteForm|crispy}}
+                                <button style="float: right;"><i class="fas fa-hand-holding-usd fa-2x" style="margin-left: 20px;margin-bottom: 8px;"></i></button>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}

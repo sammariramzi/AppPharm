@@ -1,0 +1,71 @@
+{% extends "include/main.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="card mb-4">
+    <div class="card-header">
+        <div>
+            <i class="fas fa-table me-1"></i>
+            <h3>Echanges</h3>
+            <a href="/add_echange">
+                <button class="btn btn-success" style="float: right;">
+                    <i class="fas fa-plus-square"></i> Ajouter
+                </button>
+            </a>
+        </div>
+    </div>
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>Nom commercial</th>
+                    <th>Pharmaci</th>
+                    <th>Quantité</th>
+                    {% if request.user.is_staff %}
+                        <th>Action</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Nom commercial</th>
+                    <th>Pharmaci</th>
+                    <th>Quantité</th>
+                    {% if request.user.is_staff %}
+                        <th>Action</th>
+                    {% endif %}
+                </tr>
+            </tfoot>
+            <tbody>
+
+                {% for i in echange %}
+                <tr>
+                    <td>
+                        <a href="{% url 'App:detail_product' i.Nom_C %}">
+                            <button style="color: rgb(95, 95, 248);">
+                                <i class="fas fa-info-circle"></i>
+                            </button>{{i.Nom_C}}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'App:detail_pharmaci' i.Nom_Ph %}">
+                            <button style="color: rgb(95, 95, 248);">
+                                <i class="fas fa-info-circle"></i>
+                            </button>{{i.Nom_Ph}}
+                        </a>
+                        
+                    </td>
+                    <td>
+                        {{i.Qte}}
+                    </td>
+                    {% if request.user.is_staff %}
+                    <td>         
+                        <a href="{% url 'App:dalete_echange' i.Id %}"><button style="color:rgb(212, 0, 0);"><i class="fas fa-trash-alt"></i></button></a>  
+                    </td>
+                    {% endif %} 
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}

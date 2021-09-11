@@ -1,0 +1,196 @@
+<script>
+    dci_list()
+    labo_list()
+    therapeutique_list()
+    sous_classe_list()
+
+    function dci_list() {
+        $.ajax({
+            url: '/dci_list',
+            type: 'GET',
+            success: function (resp) {
+                const data = JSON.parse(resp.data);
+                console.log(data);
+                let options = '';
+                data.forEach(x => {
+                    options += '<option value=' + x.fields.Id + '>' + x.pk + '</option>';
+                });
+                $("#formAdd select[name='dci']").append(options);
+                
+
+            },
+            error: function (resp) {
+                console.log('Something went wrong');
+            }
+        });
+    }
+
+
+    function labo_list() {
+        $.ajax({
+            url: '/labo_list',
+            type: 'GET',
+            success: function (resp) {
+                const data = JSON.parse(resp.data);
+                console.log(data);
+                let options = '';
+                data.forEach(x => {
+                    options += '<option value=' + x.fields.Id + '>' + x.pk + '</option>';
+                });
+                $("#formAdd select[name='Laboratoire']").find('.after').after(options);
+            },
+            error: function (resp) {
+                console.log('Something went wrong');
+            }
+        });
+    }
+
+
+    function therapeutique_list() {
+        $.ajax({
+            url: '/therapeutique_list',
+            type: 'GET',
+            success: function (resp) {
+                const data = JSON.parse(resp.data);
+                console.log(data);
+                let options = '';
+                data.forEach(x => {
+                    options += '<option value=' + x.fields.Id + '>' + x.pk + '</option>';
+                });
+                $("#formAdd select[name='Classe_Therapeutique']").find('.after').after(options);
+            },
+            error: function (resp) {
+                console.log('Something went wrong');
+            }
+        });
+    }
+
+    function sous_classe_list() {
+        $.ajax({
+            url: '/sous_classe_list',
+            type: 'GET',
+            success: function (resp) {
+
+                const data = JSON.parse(resp.data);
+                console.log(data);
+                let options = '';
+                data.forEach(x => {
+                    options += '<option value=' + x.fields.Id + '>' + x.pk + '</option>';
+                });
+                $("#formAdd select[name='Sous_Classe']").find('.after').after(options);
+            },
+            error: function (resp) {
+                console.log('Something went wrong');
+            }
+        });
+    }
+    
+
+
+    function add_dci() {
+        let x = document.getElementById('id_Nom').value;
+        if (x == "") {
+            alert("Name must be filled out");
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "{% url 'App:add_Dci' %}",
+                data: {
+                    'nom': $('#id_Nom').val(),
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+
+                },
+                success: function () {
+                    $('#staticBackdrop').modal('hide')
+                    dci_list()
+                    $("#formAdd select[name='dci']").find('.after').nextAll().remove();
+                }
+            });
+
+
+        }
+
+    }
+
+
+    function add_labo() {
+        let x = document.getElementById('id_Nom_labo').value;
+        let y = document.getElementById('id_Tel').value;
+        let z = document.getElementById('id_Adresse').value;
+        if (x == "" || y == "" || z == "") {
+            alert("Name must be filled out");
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "{% url 'App:add_Labo' %}",
+                data: {
+                    'nom': $('#id_Nom_labo').val(),
+                    'tel': $('#id_Tel').val(),
+                    'adresse': $('#id_Adresse').val(),
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+
+                },
+                success: function () {
+                    $('#staticBackdrop2').modal('hide')
+                    labo_list()
+                    $("#formAdd select[name='Laboratoire']").find('.after').nextAll().remove();
+                }
+            });
+
+
+        }
+
+    }
+
+
+    function add_therapeu() {
+        let x = document.getElementById('id_Nom_thérapeutique').value;
+        if (x == "") {
+            alert("Name must be filled out");
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "{% url 'App:add_Therapeutique' %}",
+                data: {
+                    'nom': $('#id_Nom_thérapeutique').val(),
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+
+                },
+                success: function () {
+                    $('#staticBackdrop3').modal('hide')
+                    therapeutique_list()
+                    $("#formAdd select[name='Classe_Therapeutique']").nextAll().remove();
+                }
+            });
+
+
+        }
+
+    }
+
+
+    function add_sous_class() {
+        let x = document.getElementById('id_Nom_classe').value;
+        if (x == "") {
+            alert("Name must be filled out");
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "{% url 'App:add_Sous_classe' %}",
+                data: {
+                    'nom': $('#id_Nom_classe').val(),
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+
+                },
+                success: function () {
+                    $('#staticBackdrop4').modal('hide')
+                    sous_classe_list()
+                    $("#formAdd select[name='Sous_Classe']").find('.after').nextAll().remove();
+                }
+            });
+
+
+        }
+
+    }
+</script>

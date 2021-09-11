@@ -1,0 +1,73 @@
+{% extends "include/main.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        <h2>Add Medicines</h2>
+    </div>
+    <div class="card-body">
+        <form id="formAdd" method="POST">
+            {% csrf_token %}
+            <div>{{productform.Nom_C|as_crispy_field}}</div>
+            <div>{{productform.N_Lot|as_crispy_field}}</div>
+            <div>{{productform.Dosage|as_crispy_field}}</div>
+            <div>{{productform.Forme|as_crispy_field}}</div>
+            <div>{{productform.Présentation|as_crispy_field}}</div>
+            
+            <label for="id_Classe_thérapeutique_Nom" class=" requiredField">
+                DCI <span class="asteriskField">*</span>
+            </label>
+            <div class="form-inline">
+                <select name="dci" class="form-control" style="width: 90%;">
+                    <option class="after" value="">--Select--</option>
+                </select>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
+                        class="fas fa-plus fa-2x"></i></a>
+            </div>
+            <label for="Laboratoire" class=" requiredField">
+                Laboratoire <span class="asteriskField">*</span>
+            </label>
+            <div class="form-inline">
+                <select name="Laboratoire" class="form-control" style="width: 90%;">
+                    <option class="after" value="">--Select--</option>
+                </select>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop2"><i
+                        class="fas fa-plus fa-2x"></i></a>
+            </div>
+            <label for="Thérapeutique" class=" requiredField">
+                Classe Thérapeutique <span class="asteriskField">*</span>
+            </label>
+            <div class="form-inline">
+                <select name="Classe_Therapeutique" class="form-control" style="width: 90%;">
+                    <option class="after" value="">--Select--</option>
+                </select>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop3"><i
+                        class="fas fa-plus fa-2x"></i></a>
+            </div>
+            <label for="Sous_Classe" class=" requiredField">
+                Sous Classe <span class="asteriskField">*</span>
+            </label>
+            <div class="form-inline">
+                <select name="Sous_Classe" class="form-control" style="width: 90%;">
+                    <option class="after" value="">--Select--</option>
+                </select>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop4"><i
+                        class="fas fa-plus fa-2x"></i></a>
+            </div>
+            <div>{{productform.Conditionnement|as_crispy_field}}</div>
+            <div>{{productform.Spécification|as_crispy_field}}</div>
+            <div>{{productform.Tableau|as_crispy_field}}</div>
+            <div>{{productform.Durée_conservation|as_crispy_field}}</div>
+            <div>{{productform.Price|as_crispy_field}}</div>
+            <div>{{productform.Qte|as_crispy_field}}</div>
+            <button type="submit" class="btn btn-success" style="margin-top:30px ;">Submit</button>
+        </form>
+    </div>
+</div>
+{% include "App/add_Dci.html" %}
+{% include "App/add_Laboratoire.html" %}
+{% include "App/add_Classe_thérapeutique.html" %}
+{% include "App/add_Sous_classe.html" %}
+{% include "include/script.html" %}
+{% endblock content %}
