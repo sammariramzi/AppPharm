@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm 
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate ,login , logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, JsonResponse
@@ -12,6 +12,7 @@ from django.utils.decorators import method_decorator
 from .decorators import unauthenticate_user, allowed_users
 from .models import *
 from .forms import *
+
 
 @unauthenticate_user
 def login_views(request):
@@ -134,7 +135,7 @@ def edit_product(request , pk):
     form=Edit_Productform(instance=product)
     if (request.method == 'POST'):
         form=Edit_Productform(request.POST, instance=product)
-        if form.is_valid():
+        if form.is_valid() and form.changed_data:
             form.save()
 
             edit=Product_edit()
@@ -320,7 +321,6 @@ class Pharmaci_view (View):
     def add_pharmaci(request, *args, **kwargs):
         if request.is_ajax():
             pharmaci=Pharmaci()
-            pharmaci.Numéro_Inscription=request.POST['num']
             pharmaci.Nom_Ph=request.POST['nom']
             pharmaci.Tel=request.POST['tel']
             pharmaci.Adresse=request.POST['adresse']
@@ -351,7 +351,9 @@ def CreationUser(request):
     if (request.method == 'POST'):
         form=New_user(request.POST)
         if form.is_valid():
-            form.save()
+            user=form.save()
+            group=Group.objects.get(name='employé')
+            user.groups.add(group)
             messages.success(request,'Utilisateur ajouter avec succès')
             return redirect('App:list_user')
 
@@ -365,15 +367,23 @@ def CreationUser(request):
 def edit_user(request , pk):
     user=User.objects.get(id=pk)
     form=Update_user(instance=user)
-    if (request.method == 'POST'):
+    if (request.method == 'POST'):    
         form=Update_user(request.POST, instance=user)
-        if form.is_valid():
+        if form.is_valid() and form.changed_data:
             form.save()
+            group=form.cleaned_data['groups'].values()
+            if group[0]['name'] == 'gerant':
+                user.is_staff=True
+                user.save()
+            elif group[0]['name'] == 'employé':
+                user.is_staff=False
+                user.save()
             messages.success(request,'Utilisateur mis à jour avec succès')
             return redirect('App:list_user')
-
+        return redirect('App:list_user')
     context={
         'edit_user':form,
+        'user':user
     }
     return render(request, 'App/edit_user.html', context )
 

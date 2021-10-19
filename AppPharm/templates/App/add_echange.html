@@ -50,18 +50,16 @@
 
 
     function add_pharmaci() {
-        let w = document.getElementById('id_Numéro_Inscription').value;
         let x = document.getElementById('id_Nom_Ph').value;
         let y = document.getElementById('id_Tel').value;
         let z = document.getElementById('id_Adresse').value;
-        if (w == "" || x == "" || y == "" || z == "") {
+        if ( x == "" || y == "" || z == "" ) {
             alert("Name must be filled out");
         } else {
             $.ajax({
                 type: "POST",
                 url: "{% url 'App:add_pharmaci' %}",
                 data: {
-                    'num': $('#id_Numéro_Inscription').val(),
                     'nom': $('#id_Nom_Ph').val(),
                     'tel': $('#id_Tel').val(),
                     'adresse': $('#id_Adresse').val(),

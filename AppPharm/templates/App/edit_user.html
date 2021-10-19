@@ -9,7 +9,16 @@
     <div class="card-body">
         <form method="POST">
             {% csrf_token %}
-            {{edit_user|crispy}}
+            {{edit_user.username|as_crispy_field}}
+            {{edit_user.first_name|as_crispy_field}}
+            {{edit_user.last_name|as_crispy_field}}
+            {{edit_user.email|as_crispy_field}}
+            {% if not user.username == request.user.username %}
+                {{edit_user.groups|as_crispy_field}}
+                {{edit_user.is_active|as_crispy_field}}
+            {% endif %}
+                
+            
             <button type="submit" class="btn btn-success" style="margin-top:30px ;">Submit</button>
         </form>
     </div>

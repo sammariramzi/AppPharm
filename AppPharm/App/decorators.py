@@ -1,5 +1,5 @@
 from django.shortcuts import redirect
-
+from django.contrib import messages
 
 def unauthenticate_user (view_func):
     def wrapper_func(request , *args , **kwargs):
@@ -20,6 +20,7 @@ def allowed_users(allowd_roles=[]):
             if group in allowd_roles :
                 return view_func(request , *args , **kwargs)
             else:
+                messages.error(request ,"utilisateur n'a pas la permissionss")
                 return redirect('App:ventes')
         return wrapper_func
     return decorator 

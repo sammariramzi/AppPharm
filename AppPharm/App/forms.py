@@ -87,7 +87,7 @@ class VenteForm(forms.ModelForm):
 class New_user(UserCreationForm):
     class Meta:
         model=User
-        fields=['username','password1','password2','first_name','last_name','email','groups']
+        fields=['username','password1','password2','first_name','last_name','email']
         labels ={
             'username':'Nom Utilisateur',
             'password1':'Mot De Passe',
@@ -95,7 +95,6 @@ class New_user(UserCreationForm):
             'first_name':'Nom',
             'last_name':'Prenom',
             'email':'Email',
-            'groups':'groupe',
         }
 
 class Update_user(forms.ModelForm):
