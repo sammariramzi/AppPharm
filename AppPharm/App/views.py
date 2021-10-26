@@ -367,19 +367,20 @@ def CreationUser(request):
 def edit_user(request , pk):
     user=User.objects.get(id=pk)
     form=Update_user(instance=user)
-    if (request.method == 'POST'):    
+    if (request.method == 'POST'):   
         form=Update_user(request.POST, instance=user)
-        if form.is_valid() and form.changed_data:
+        if form.is_valid() and form.changed_data:     
             form.save()
             group=form.cleaned_data['groups'].values()
-            if group[0]['name'] == 'gerant':
-                user.is_staff=True
-                user.save()
-            elif group[0]['name'] == 'employé':
-                user.is_staff=False
-                user.save()
-            messages.success(request,'Utilisateur mis à jour avec succès')
-            return redirect('App:list_user')
+            if not len(group) == 0:
+                if group[0]['name'] == 'gerant':
+                    user.is_staff=True
+                    user.save()
+                elif group[0]['name'] == 'employé':
+                    user.is_staff=False
+                    user.save()
+                messages.success(request,'Utilisateur mis à jour avec succès')
+                return redirect('App:list_user')
         return redirect('App:list_user')
     context={
         'edit_user':form,
