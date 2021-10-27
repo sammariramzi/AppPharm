@@ -108,3 +108,15 @@ class Update_user(forms.ModelForm):
             'email':'Email',
             'groups':'groupe',
         }
+
+
+class Update_user_connect(forms.ModelForm):
+    class Meta:
+        model=User
+        fields=['username','first_name','last_name','email']
+        labels ={
+            'username':'Nom Utilisateur',
+            'first_name':'Nom',
+            'last_name':'Prenom',
+            'email':'Email',
+        }

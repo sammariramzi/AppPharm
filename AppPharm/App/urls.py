@@ -29,6 +29,7 @@ urlpatterns = [
     path('actions/', actions , name="actions"), 
     path('CreationUser/', CreationUser , name="CreationUser"), 
     path('edit_user/<str:pk>/', edit_user , name="edit_user"), 
+    path('edit_user_connect/<str:pk>/', edit_user_connect , name="edit_user_connect"), 
     path('list_user/', list_user , name="list_user"), 
     path('detail_user/<str:pk>/', detail_user , name="detail_user"), 
     path('dalete_user/<str:pk>/', dalete_user , name="dalete_user"), 

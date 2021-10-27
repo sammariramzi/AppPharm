@@ -47,6 +47,8 @@
                         {% if not request.user.username == i.username %}
                             <a href="{% url 'App:edit_user' i.id %}"><button><i class="fas fa-pen-alt"></i></button></a>
                             <a href="{% url 'App:dalete_user' i.id %}"><button style="color:rgb(212, 0, 0);"><i class="fas fa-trash-alt"></i></button></a>
+                        {% else %}
+                            <a href="{% url 'App:edit_user_connect' i.id %}"><button><i class="fas fa-pen-alt"></i></button></a>
                         {% endif %}                         
                     </td>
                 </tr>

@@ -390,6 +390,24 @@ def edit_user(request , pk):
 
 @login_required(login_url='App:login')
 @allowed_users(allowd_roles=['gerant'])
+def edit_user_connect(request , pk):
+    user=User.objects.get(id=pk)
+    form=Update_user_connect(instance=user)
+    if (request.method == 'POST'):   
+        form=Update_user_connect(request.POST, instance=user)
+        if form.is_valid() and form.changed_data:     
+            form.save()          
+            messages.success(request,'Utilisateur mis à jour avec succès')
+            return redirect('App:list_user')
+        return redirect('App:list_user')
+    context={
+        'edit_user':form,
+        'user':user
+    }
+    return render(request, 'App/edit_user_connect.html', context )
+
+@login_required(login_url='App:login')
+@allowed_users(allowd_roles=['gerant'])
 def list_user(request):
     user=User.objects.all()
     context={

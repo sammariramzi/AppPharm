@@ -49,7 +49,7 @@ class Product (models.Model):
     Tableau=models.CharField(max_length=20 , null=True,verbose_name='Tableau ')
     Durée_conservation=models.CharField(max_length=20 , null=True,verbose_name='Durée Conservation ')
     Price=models.DecimalField(max_digits=20, decimal_places=3 , null=True,verbose_name='Price ')
-    Qte=models.PositiveIntegerField(null=True,validators=[MinValueValidator(1)],verbose_name='Quantité ')
+    Qte=models.PositiveIntegerField(null=True,validators=[MinValueValidator(0)],verbose_name='Quantité ')
     
 
     def __str__(self): 
