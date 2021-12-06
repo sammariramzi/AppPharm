@@ -7,8 +7,8 @@ python version : 3.9.7
         
 2..> create virtual environment
 
-3..> Install all required packages with:
-        $ pip install -r requirements.txt
-                    OR
-        $ python3 -m pip install -r requirements.txt
+3..> Install all required packages with:   
+        $ pip install -r requirements.txt    
+                    OR    
+        $ python3 -m pip install -r requirements.txt   
         
