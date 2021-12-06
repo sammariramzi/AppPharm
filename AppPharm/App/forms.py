@@ -95,6 +95,7 @@ class New_user(UserCreationForm):
             'first_name':'Nom',
             'last_name':'Prenom',
             'email':'Email',
+            
         }
 
 class Update_user(forms.ModelForm):
@@ -107,6 +108,7 @@ class Update_user(forms.ModelForm):
             'last_name':'Prenom',
             'email':'Email',
             'groups':'groupe',
+            'is_active':'is_active',
         }
 
 

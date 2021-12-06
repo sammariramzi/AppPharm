@@ -28,7 +28,7 @@ def login_views(request):
             messages.error(request ,'Nom utilisateur ou mot de passe incorrect, réessayez !')
     
     context={
-        'loginform' : AuthenticationForm
+        'loginform' : AuthenticationForm,
     }
     return render(request, 'App/login.html',context) 
 

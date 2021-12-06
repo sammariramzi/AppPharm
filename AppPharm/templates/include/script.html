@@ -90,7 +90,12 @@
     function add_dci() {
         let x = document.getElementById('id_Nom').value;
         if (x == "") {
-            alert("Name must be filled out");
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Remplissez tous les champs pour continuer!',
+                showConfirmButton: false,
+            })
         } else {
             $.ajax({
                 type: "POST",
@@ -118,7 +123,12 @@
         let y = document.getElementById('id_Tel').value;
         let z = document.getElementById('id_Adresse').value;
         if (x == "" || y == "" || z == "") {
-            alert("Name must be filled out");
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Remplissez tous les champs pour continuer!',
+                showConfirmButton: false,
+            })
         } else {
             $.ajax({
                 type: "POST",
@@ -146,7 +156,12 @@
     function add_therapeu() {
         let x = document.getElementById('id_Nom_thérapeutique').value;
         if (x == "") {
-            alert("Name must be filled out");
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Remplissez tous les champs pour continuer!',
+                showConfirmButton: false,
+            })
         } else {
             $.ajax({
                 type: "POST",
@@ -172,7 +187,12 @@
     function add_sous_class() {
         let x = document.getElementById('id_Nom_classe').value;
         if (x == "") {
-            alert("Name must be filled out");
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Remplissez tous les champs pour continuer!',
+                showConfirmButton: false,
+            })
         } else {
             $.ajax({
                 type: "POST",
